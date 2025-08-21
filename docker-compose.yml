@@ -33,7 +33,7 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - db
+      - postgres
       - redis
     env_file:
       - ./mathApp-service/.env
