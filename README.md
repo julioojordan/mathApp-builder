@@ -16,7 +16,7 @@ This repository provides a self-contained "one-click" setup to run the **Math Ap
 - **Windows**: PowerShell (for `.bat` script)  
 - **macOS/Linux**: Bash (for `.sh` script)  
 - **Docker** installed and running
-
+- **Postgress** make sure to stop any postgres server running
 ---
 
 ## 🚀 How To use Locally
