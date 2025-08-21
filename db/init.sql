@@ -1,23 +1,6 @@
--- =========================================
--- OPTIONAL: jalankan ini dari database lain (mis. -d postgres)
--- untuk membuat database baru UTF-8
--- =========================================
-CREATE DATABASE math_app
-  WITH ENCODING 'UTF8'
-       TEMPLATE template0
-       LC_COLLATE 'C'
-       LC_CTYPE   'C';
-
--- Kalau baris di atas kamu pakai, lalu connect ke DB-nya:
-\c math_app
-
 SET client_encoding = 'UTF8';
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
--- =========================
--- SCHEMA
--- =========================
 
 CREATE TABLE users (
   id             BIGSERIAL PRIMARY KEY,
