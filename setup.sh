@@ -13,6 +13,10 @@ git clone https://github.com/julioojordan/mathApp-builder.git
 # Enter project directory
 cd mathApp-builder || exit
 
-# Run the setup script (POSIX shell version)
+# Fix permission
+echo "Setting execution permission for scripts..."
+chmod +x run.sh update.sh
+
+# Run the setup script
 echo "Running run.sh..."
-bash ./run.sh
+./run.sh
