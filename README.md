@@ -61,11 +61,13 @@ chmod +x setup.sh
 - No unit tests implemented  
 - Only one GitHub branch (this is a personal project)  
 - this rules: _"Re-submit with same `attempt_id` on the same day shouldn't increment streak"_ — handled by rejecting submissions if a record exists in user_progress
+- that rejecting submission behavior will make re-attempt with same attempt_id got error rejectd because record already exist too, but in case anything happend I already did the hardening with the correct error code and message as the requirement given [see here](https://github.com/julioojordan/mathApp-service/blob/a21f655f6073e000d1be19bd5cb4b164554b11b3/src/repositories/submissionRepository.js#L27)
 - Submission data is only stored in Redis on "Check" (not yet persisted to DB)  
 - Redis caching is prioritized over frequent DB writes  
 - Ideal background task (Kafka/microservice) not yet implemented to sync Redis → DB  
 - Secrets (DB/Redis) still exposed in `.env` instead of using Docker/CI secrets  
 - Quiz session does not persist — if user refreshes, progress resets unless final submission is done  
+- api documentation: [Link to Postman Collection](https://www.postman.com/security-geoscientist-58981571/workspace/test-math-app/collection/32935117-adc7b708-554f-48ab-8c65-baf39f823deb?action=share&source=copy-link&creator=32935117) 
 
 ### Frontend
 
