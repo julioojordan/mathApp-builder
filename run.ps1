@@ -17,10 +17,8 @@ try {
     docker-compose up --build -d
 
     Write-Host ""
-    Write-Host "MathApp will be ready at http://localhost:3000 in a few seconds"
 }
 catch {
     Write-Host ""
     Write-Host "An error occurred: $($_.Exception.Message)"
     exit 1
-}

@@ -13,4 +13,4 @@ git clone $FE_REPO mathApp
 echo "Cloning repo backend ($BE_REPO)..."
 git clone $BE_REPO mathApp-service
 
-echo "Repositori Updated Successfully!"
+echo "Repository Updated Successfully!"
