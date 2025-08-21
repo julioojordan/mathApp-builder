@@ -1,0 +1,71 @@
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis_server
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: math_app
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mathApp_network
+
+  backend:
+    build:
+      context: ./mathApp-service
+      dockerfile: Dockerfile
+    container_name: mathApp-service
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - ./mathApp-service/.env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: root
+      DB_NAME: math_app
+    networks:
+      - mathApp_network
+
+  frontend:
+    build:
+      context: ./mathApp
+      dockerfile: Dockerfile
+    container_name: mathApp
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: "http://localhost:3001"
+      NODE_ENV: "development"
+    networks:
+      - mathApp_network
+
+volumes:
+  db_data:
+  redis_data:
+
+networks:
+  mathApp_network:
+    driver: bridge
