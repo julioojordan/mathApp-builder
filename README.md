@@ -20,7 +20,7 @@ This repository contains a self-contained "one-click" solution to set up and run
 
 ### Windows (Batch Script)
 
-1. Create a file named `install-mathApp.bat` with the following content:
+1. Create a file named `setup.bat` with the following content or just copy the setup.bat:
    ```bat
    @echo off
    REM Remove existing folder if any
@@ -42,13 +42,13 @@ This repository contains a self-contained "one-click" solution to set up and run
 
    pause
    ```
-2. Double-click `install-mathApp.bat` to execute the setup and launch the application., maybe process took too long because your internet when downloading image in docker
+2. Double-click `setup.bat` to execute the setup and launch the application., maybe process took too long because your internet when downloading image in docker
 
 ---
 
 ### macOS / Linux (Shell Script)
 
-1. Create a file named `install-mathApp.sh` with the following content and give it execute permission:
+1. Create a file named `setup.sh` with the following content or copy the setup.bat from this repo to your local and give it execute permission:
    ```bash
    #!/usr/bin/env bash
 
@@ -69,10 +69,10 @@ This repository contains a self-contained "one-click" solution to set up and run
    echo "Running run.sh..."
    bash ./run.sh
    ```
-2. Make the script executable and run it:
+2. after you got the setup.sh Make the script executable and run it:
    ```bash
-   chmod +x install-mathApp.sh
-   ./install-mathApp.sh
+   chmod +x setup.sh
+   ./setup.sh
    ```
 
 ---
