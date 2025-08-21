@@ -43,7 +43,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: root
       DB_NAME: math_app
-      REDIS_HOST: redis
+      REDIS_HOST: host.docker.internal
     networks:
       - mathApp_network
 
