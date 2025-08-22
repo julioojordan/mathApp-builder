@@ -61,13 +61,12 @@ chmod +x setup.sh
 
 - No unit tests implemented  
 - Only one GitHub branch (this is a personal project)  
-- this rules: _"Re-submit with same `attempt_id` on the same day shouldn't increment streak"_ — handled by rejecting submissions if a record exists in user_progress
-- that rejecting submission behavior will make re-attempt with same attempt_id got error rejectd because record already exist too, but in case anything happend I already did the hardening with the correct error code and message as the requirement given [see here](https://github.com/julioojordan/mathApp-service/blob/a21f655f6073e000d1be19bd5cb4b164554b11b3/src/repositories/submissionRepository.js#L27)
-- Submission data is only stored in Redis on "Check" (not yet persisted to DB)  
+- rejecting submissions if a record exists in user_progresssubmission behavior will make re-attempt with same attempt_id got error rejected because record already exist, but in case anything happend I already did the hardening with the correct error code and message as the requirement given [see here](https://github.com/julioojordan/mathApp-service/blob/a21f655f6073e000d1be19bd5cb4b164554b11b3/src/repositories/submissionRepository.js#L27)
+- user progress data is only stored in Redis on "Check" (not yet persisted to DB) and will be stored to DB after user submit  
 - Redis caching is prioritized over frequent DB writes  
 - Ideal background task (Kafka/microservice) not yet implemented to sync Redis → DB  
 - Secrets (DB/Redis) still exposed in `.env` instead of using Docker/CI secrets  
-- Quiz session does not persist — if user refreshes, progress resets unless final submission is done  
+- Quiz session does not persist — if user refreshes, progress resets (will invalidated redis cache ) unless final submission is done  
 - api documentation: [Link to Postman Collection](https://www.postman.com/security-geoscientist-58981571/workspace/test-math-app/collection/32935117-adc7b708-554f-48ab-8c65-baf39f823deb?action=share&source=copy-link&creator=32935117) 
 
 ### Frontend
@@ -86,11 +85,11 @@ chmod +x setup.sh
 - Redis keys:  
   - `attempt:${user_id}:${lesson_id}`  
   - `answered:${user_id}:${lesson_id}:${problem_id}`  
-  > These are invalidated when user enters QuizPage, accesses `/api/lesson/:id`, or submits
+  > These are invalidated everytime user enters QuizPage, accesses `/api/lesson/:id`, or submits
 
 - Validation compares `meta_json` (Redis) with user's answers to ensure integrity  
 - Duplicate `attempt_id`s raise DB error to prevent double submission  
-- Answered problems are locked (re-answer triggers rejection)
+- Answered problems are locked in redis cache (re-answer triggers rejection)
 
 ### Frontend
 
