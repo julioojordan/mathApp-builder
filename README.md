@@ -16,8 +16,8 @@ This repository provides a self-contained "one-click" setup to run the **Math Ap
 - **Windows**: PowerShell (for `.bat` script)  
 - **macOS/Linux**: Bash (for `.sh` script)  
 - **Docker** installed and running
-- **Postgress** make sure to stop any postgres server running or check availabili for port 5432
-- **Redis** make sure to stop any redis server running or check availabili for port 6379
+- **Postgress** make sure to stop any postgres server running or check availability for port 5432
+- **Redis** make sure to stop any redis server running or check availability for port 6379
 ---
 
 ## 🚀 How To use Locally
